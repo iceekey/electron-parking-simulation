@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,600" rel="stylesheet">
+    <link rel="stylesheet" href="lib/lobibox/dist/css/lobibox.min.css"/>
+    <link rel="stylesheet" href="lib/jquery-modal/jquery.modal.min.css" type="text/css" media="screen" />
+    <link rel="stylesheet" type="text/less" href="main.less" />
+    <title>Car parking</title>
+</head>
+<body>
+    <div id="app" class="app hide">
+        <div class="score" id="score">
+            <div id="points"></div>
+            <div id="parkingZones"></div>
+        </div>
+        
+        <div id="tools" class="tools">
+            <div class="tool tiles">
+                <div id="grass" class="tile">
+                    <img src="./images/constructor/grass.png" alt="Grass">
+                </div>
+                <div id="road" class="tile">
+                    <img src="./images/constructor/road.png" alt="Road">
+                </div>
+                <div id="parking" class="tile">
+                    <img src="./images/constructor/parking-place.png" alt="Parking place">
+                </div>
+            </div>
+
+            <div class="tool import-export">
+                <a href="#importExportModal" rel="modal:open">Сохранить/Открыть</a>
+            </div>
+        </div>
+
+        <!--<div class="tools right">
+            <select id="distribution">
+                <option value="determ">Детерминированный</option>
+                <option value="uniform" selected>Равномерный</option>
+                <option value="gauss">Нормальный</option>
+                <option value="exp">Экспоненциальный</option>
+            </select>
+
+            <div class="options">
+                <input type="text" value="1" id="determMean" class="determ">
+                <input type="text" value="2" id="uniformMin" class="'uniform'">
+                <input type="text" value="3" id="uniformMax" class="uniform">
+                <input type="text" value="4" id="gaussMean" class="gauss">
+                <input type="text" value="5" id="gaussDeviation" class="gauss">
+                <input type="text" value="6" id="expRate" class="exp">
+            </div>
+        </div>        -->
+
+        <canvas id="surface" width="1050" height="545"></canvas>
+
+        <div id="control-buttons" class="control-buttons">
+            <button id="launch" class="button" type="text">Редактировать</button>
+            <button id="regular_speed" class="button green" type="text">▶</button>
+            <button id="increased_speed" class="button green" type="text">▶▶</button>
+        </div>
+
+        <div class="info">
+            <a href="#about" rel="modal:open">О программе</a>
+            <a href="#authors" rel="modal:open">Авторы</a>
+        </div>
+    </div>
+
+    <div id="importExportModal" class="modal" style="display:none;">
+        <p>Вы можете сохранить текущую конфиругацию в файл для многократного использования.</p>
+        <p>Загрузить сохраненную конфиругацию можно используя функцию импорта.</p>
+        <p class="modal-space">
+            <button type="text" class="button green small inline">Импорт…</button>
+            <button type="text" class="button small inline">Cохранить…</button>
+        </p>
+    </div>
+
+
+    <div id="about" class="modal" style="display:none;">
+        <p><h2>О программе</h2></p>
+        <p class="modal-space">Что то о программе...</p>
+    </div>
+
+    <div id="authors" class="modal" style="display:none;">
+        <p><h2>Авторы</h2></p>
+        <p class="modal-space">Ну, короче, Дима Юля и Ксюша</p>
+    </div>
+
+    <script src="./../node_modules/createjs-easeljs/lib/easeljs-NEXT.min.js"></script>
+    <script src="./../node_modules/createjs-tweenjs/lib/tweenjs-NEXT.min.js"></script>
+    <script src="./../node_modules/createjs-preloadjs/lib/preloadjs-NEXT.min.js"></script>
+    <script src="bootstrap.js"></script>
+    <script src="lib/lobibox/dist/js/lobibox.min.js"></script>
+    <script src="lib/jquery-modal/jquery.modal.min.js"></script>
+</body>
+</html>

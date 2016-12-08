@@ -1,0 +1,22 @@
+{
+    "parserOptions": {
+        "ecmaVersion": 6
+    },
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "globals": {
+        "createjs": true,
+        "$": true,
+        "Rx": true,
+        "Promise": true,
+        "Lobibox": true
+    },
+    "rules": {
+        "max-len": ["error", 120],
+        "newline-after-var":  0,
+        "no-invalid-this": "off"
+    },
+    "extends": "defaults/configurations/google"
+}

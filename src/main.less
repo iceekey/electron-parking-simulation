@@ -1,0 +1,231 @@
+@import './../node_modules/reset-css/reset';
+
+@side-padding: 30px;
+
+body {
+  background-image: url('./images/bg.png');
+  font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.27;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  font-size: inherit;
+  color: inherit;
+}
+
+h2 { font-size: 18px; }
+
+.app {
+  transition: linear 0.3s opacity;
+  opacity: 1;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+
+  &::after {
+    display: block;
+    content: '';
+    width: 680px;
+    height: 600px;
+    box-shadow: 0 20px 200px 150px rgba(0, 0, 0, 0.37);
+    transform: rotateX(60deg) rotateZ(45deg);
+    background: #000;
+    z-index: -99;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+  }
+
+  &.hide { opacity: 0; }
+}
+
+*:focus { outline: none !important; }
+
+canvas {
+  display: block;
+  margin: 0 auto;
+}
+
+.blur {
+  filter: blur(5px);
+  opacity: 0.53;
+}
+
+.control-buttons {
+  transition: opacity 0.2s linear;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  left: @side-padding;
+  bottom: calc(~'6vh + 5px');
+}
+
+.button {
+  cursor: pointer;
+  position: relative;
+  top: -3px;
+  display: block;
+  border: none;
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #fff;
+  padding: 10px 35px;
+  background: -webkit-linear-gradient(#3eb8e5 0%, #2ca0ca 100%);
+  background: -o-linear-gradient(#3eb8e5 0%, #2ca0ca 100%);
+  background: linear-gradient(#3eb8e5 0%, #2ca0ca 100%);
+  border-radius: 5px;
+  box-shadow: inset 0 0 0 #2ab7ec, 0 5px 0 0 #156785, 0 10px 5px rgba(0, 0, 0, 0.23);
+
+  &:hover {
+    background: -webkit-linear-gradient(#42d9ed 0%, #30c1dd 100%);
+    background: -o-linear-gradient(#42d9ed 0%, #30c1dd 100%);
+    background: linear-gradient(#42d9ed 0%, #30c1dd 100%);
+  }
+
+  &:active {
+    top: 0;
+    box-shadow: inset 0 1px 0 #2ab7ec, 0 2px 0 0 #156785, 0 5px 3px rgba(0, 0, 0, 0.23);
+  }
+
+  + .button { margin-left: 20px; }
+
+  &.green {
+    background: -webkit-linear-gradient(rgba(181,230,34,1) 0%, rgba(107,194,25,1) 100%);
+    background: -o-linear-gradient(rgba(181,230,34,1) 0%, rgba(107,194,25,1) 100%);
+    background: linear-gradient(rgba(181,230,34,1) 0%, rgba(107,194,25,1) 100%);
+    box-shadow: inset 0 0 0 #488f00, 0 5px 0 0 #488f00, 0 10px 5px rgba(0, 0, 0, 0.23);
+
+    &:hover {
+      background: -webkit-linear-gradient(rgba(202,247,67,1) 0%, rgba(120,204,30,1) 100%);
+      background: -o-linear-gradient(rgba(202,247,67,1) 0%, rgba(120,204,30,1) 100%);
+      background: linear-gradient(rgba(202,247,67,1) 0%, rgba(120,204,30,1) 100%);
+    }
+  }
+
+  &.small {
+    font-size: 16px;
+    padding: 7px 25px;
+  }
+
+  &.inline {
+    display: inline-block;
+
+    + .inline { margin-left: 7px; }
+  }
+}
+
+.tools {
+  position: absolute;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  left: @side-padding;
+  top: 6vh;
+
+  &.right {
+    left: initial;
+    right: @side-padding;
+  }
+}
+
+.tool {
+  height: inherit;
+  border-radius: 5px;
+  padding: 15px;
+}
+
+.tiles {
+  display: flex;
+  align-items: center;
+}
+
+.tile {
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+
+  &.active,
+  &:active {
+    box-shadow: 0 0 0 3px #10aee8;
+  }
+
+  + .tile { margin-left: 10px; }
+}
+
+.import-export {
+  a { display: block; }
+
+  display: flex;
+  align-items: center;
+  color: #ddd;
+  text-shadow: 1px 1px #000;
+  font-size: 16px;
+}
+
+.info {
+  position: absolute;
+  bottom: 6vh;
+  right: @side-padding;
+  color: #666;
+  text-shadow: 1px 1px #000;
+  font-size: 14px;
+
+  a {
+    display: block;
+
+    + a { margin-top: 3px; }
+  }
+}
+
+.score {
+  position: absolute;
+  top: 6vh;
+  left: @side-padding;
+
+  > * {
+    font-size: 16px;
+    color: #ddd;
+    text-shadow: 1px 1px #000;
+
+    + * { margin-top: 7px; }
+  }
+}
+
+.lobibox-notify {
+  box-shadow: none !important;
+  margin: 7px 0 0 !important;
+}
+
+.lobibox-notify-wrapper {
+  bottom: 6vh !important;
+  right: @side-padding !important;
+}
+
+.modal {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  padding: 30px;
+
+  p {
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+
+    + p { margin-top: 20px; }
+  }
+}
+
+.modal-space { padding-top: 15px; }

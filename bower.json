@@ -1,0 +1,25 @@
+{
+  "name": "car-parking",
+  "description": "Small car parking simulator",
+  "main": "src/main.js",
+  "authors": [
+    "Iceekey <iceekey@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "rxjs": "^4.1.0",
+    "lobibox": "^1.2.4",
+    "jquery-modal": "^0.8.0"
+  }
+}

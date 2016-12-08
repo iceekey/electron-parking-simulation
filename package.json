@@ -1,0 +1,32 @@
+{
+  "name": "car-parking",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron src/main.js"
+  },
+  "author": "Iceekey <iceekey@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@screeps/pathfinding": "^0.4.16",
+    "core-js": "^2.4.1",
+    "createjs": "0.0.1",
+    "createjs-easeljs": "^0.8.2",
+    "createjs-preloadjs": "^0.6.2",
+    "createjs-tweenjs": "^0.6.0",
+    "electron": "^1.4.6",
+    "jquery": "^3.1.1",
+    "probability-distributions": "^0.9.1",
+    "reset-css": "^2.2.0",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "electron-prebuilt-compile": "^1.4.6",
+    "eslint": "^3.10.0",
+    "eslint-config-defaults": "^9.0.0",
+    "less": "^2.7.1",
+    "stylelint": "^7.5.0",
+    "stylelint-config-standard": "^14.0.0"
+  }
+}
