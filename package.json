@@ -17,6 +17,7 @@
     "createjs-tweenjs": "^0.6.0",
     "electron": "^1.4.6",
     "jquery": "^3.1.1",
+    "jsonfile": "^2.4.0",
     "probability-distributions": "^0.9.1",
     "reset-css": "^2.2.0",
     "underscore": "^1.8.3"

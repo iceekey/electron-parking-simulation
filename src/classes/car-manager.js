@@ -1,6 +1,7 @@
 let {grid} = require('./../config');
 let StageBehaviourObject = require('./stage-behaviour-object');
 let Car = require('./car');
+let Generator = require('./generator');
 
 let PD = require('probability-distributions');
 let Rx = require('rxjs');
@@ -11,7 +12,9 @@ module.exports = class CarManager extends StageBehaviourObject {
   constructor(stage) {
     super(stage);
     this.cars = [];
-    this.generator = null;
+    this.generator = new Generator();
+    this.generatorTimeout = null;
+
     this.parkingStream = new Rx.Subject();
     this.finder = new PF.AStarFinder();
 
@@ -26,7 +29,7 @@ module.exports = class CarManager extends StageBehaviourObject {
 
   addCar() {
     let car = new Car(this.stage, 0, grid.rows), path;
-    if (this.stage.parkingManager.checkFree()) {
+    if (this.stage.parkingManager.checkFree() && Math.random() <= 0.3) {
       let zone = this.stage.parkingManager.getFreeParkingZone();
       let bindedRoad = this.stage.ground.getOrBindPP(zone[0], zone[1]);
       path = this.finder.findPath(0, grid.rows, bindedRoad.x, bindedRoad.y, this.getMatrix(null, null, false, true));
@@ -43,8 +46,17 @@ module.exports = class CarManager extends StageBehaviourObject {
   }
 
   tick() {
-    if (this.stage.running && this.isCarQueueFree()) {
-      this.addCar();
+    if (this.stage.running) {
+      if (this.generatorTimeout === null) {
+        this.generatorTimeout = this.generator.next();
+      }
+
+      this.generatorTimeout -= 1;
+
+      if (this.isCarQueueFree() && this.generatorTimeout <= 0) {
+        this.addCar();
+        this.generatorTimeout = this.generator.next();
+      }
     }
 
     this.cars.filter(car => !car.parked).forEach(car => {
@@ -70,7 +82,7 @@ module.exports = class CarManager extends StageBehaviourObject {
     }
 
     let c = this.cars[this.cars.length - 1];
-    return !(c.x === 0 && c.y === grid.rows);
+    return !(c.targetX === 0 && c.targetY === grid.rows);
   }
 
   getMatrix(x, y, lockIn, lockOut) {

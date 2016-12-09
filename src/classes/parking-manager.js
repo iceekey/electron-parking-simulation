@@ -12,6 +12,7 @@ module.exports = class ParkingManager {
     this.busyStat = 0;
     this.earned = 0;
     this.generator = new Generator();
+    this.generator.setExp(0.008);
 
     this.updateParkingZones();
 

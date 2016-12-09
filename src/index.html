@@ -33,28 +33,52 @@
             </div>
         </div>
 
-        <!--<div class="tools right">
+        <div id="distributionOptions" class="tools right">
             <select id="distribution">
                 <option value="determ">Детерминированный</option>
-                <option value="uniform" selected>Равномерный</option>
+                <option value="uniform">Равномерный</option>
                 <option value="gauss">Нормальный</option>
-                <option value="exp">Экспоненциальный</option>
+                <option value="exp" selected>Экспоненциальный</option>
             </select>
 
             <div class="options">
-                <input type="text" value="1" id="determMean" class="determ">
-                <input type="text" value="2" id="uniformMin" class="'uniform'">
-                <input type="text" value="3" id="uniformMax" class="uniform">
-                <input type="text" value="4" id="gaussMean" class="gauss">
-                <input type="text" value="5" id="gaussDeviation" class="gauss">
-                <input type="text" value="6" id="expRate" class="exp">
+                <div class="determGroup input-group">
+                    <label>Промежуток</label>
+                    <input type="text" maxlength="7" value="2" id="determMean" class="determ numeric">
+                </div>
+
+                <div class="uniformGroup input-group">
+                    <label>MIN</label>
+                    <input type="text" maxlength="7" value="0" id="uniformMin" class="uniform numeric">
+                </div>
+
+                <div class="uniformGroup input-group">
+                    <label>MAX</label>
+                    <input type="text" maxlength="7" value="3" id="uniformMax" class="uniform numeric">
+                </div>
+
+                <div class="gaussGroup input-group">
+                    <label>MX</label>
+                    <input type="text" maxlength="7" value="0" id="gaussMean" class="gauss numeric">
+                </div>
+
+                <div class="gaussGroup input-group">
+                    <label>DX</label>
+                    <input type="text" maxlength="7" value="5" id="gaussDeviation" class="gauss numeric">
+                </div>
+
+                <div class="expGroup input-group">
+                    <label>Лямбда</label>
+                    <input type="text" maxlength="7" value="0.5" id="expRate" class="exp numeric">
+                </div>
             </div>
-        </div>        -->
+        </div>        
 
         <canvas id="surface" width="1050" height="545"></canvas>
 
         <div id="control-buttons" class="control-buttons">
             <button id="launch" class="button" type="text">Редактировать</button>
+            <button id="clear" class="button" type="text">Очистить</button>
             <button id="regular_speed" class="button green" type="text">▶</button>
             <button id="increased_speed" class="button green" type="text">▶▶</button>
         </div>
@@ -69,8 +93,8 @@
         <p>Вы можете сохранить текущую конфиругацию в файл для многократного использования.</p>
         <p>Загрузить сохраненную конфиругацию можно используя функцию импорта.</p>
         <p class="modal-space">
-            <button type="text" class="button green small inline">Импорт…</button>
-            <button type="text" class="button small inline">Cохранить…</button>
+            <button id='import' type="text" class="button green small inline">Открыть…</button>
+            <button id='export' type="text" class="button small inline">Cохранить…</button>
         </p>
     </div>
 
@@ -91,5 +115,6 @@
     <script src="bootstrap.js"></script>
     <script src="lib/lobibox/dist/js/lobibox.min.js"></script>
     <script src="lib/jquery-modal/jquery.modal.min.js"></script>
+    <script src="lib/jquery-numeric/dist/jquery-numeric.js"></script>
 </body>
 </html>
