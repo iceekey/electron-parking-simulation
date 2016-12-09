@@ -226,9 +226,7 @@ module.exports = class GroundTile extends StageBehaviourObject {
   }
 
   updateRoadSprite() {
-    let {roadsAround, ppsAround, topIsRoad, rightIsRoad, bottomIsRoad,
-      leftIsRoad, topIsPP, bottomIsPP, leftIsPP, rightIsPP} = this.checkBehaviour();
-
+    let {roadsAround, ppsAround, topIsRoad, rightIsRoad, bottomIsRoad, leftIsRoad} = this.checkBehaviour();
     let {bindedCount, topIsBinded, leftIsBinded, rightIsBinded, bottomIsBinded} = this.bindedPPCount();
 
     if (roadsAround === 4) {
@@ -238,7 +236,7 @@ module.exports = class GroundTile extends StageBehaviourObject {
 
     if (roadsAround === 3) {
       if (!leftIsRoad) {
-        if (leftIsPP && leftIsBinded) {
+        if (leftIsBinded) {
           this.sprite.gotoAndStop('cross');
         } else {
           this.sprite.gotoAndStop('twSouth');
@@ -247,7 +245,7 @@ module.exports = class GroundTile extends StageBehaviourObject {
       }
 
       if (!rightIsRoad) {
-        if (rightIsPP && rightIsBinded) {
+        if (rightIsBinded) {
           this.sprite.gotoAndStop('cross');
         } else {
           this.sprite.gotoAndStop('twNorth');
@@ -256,7 +254,7 @@ module.exports = class GroundTile extends StageBehaviourObject {
       }
 
       if (!topIsRoad) {
-        if (topIsPP && topIsBinded) {
+        if (topIsBinded) {
           this.sprite.gotoAndStop('cross');
         } else {
           this.sprite.gotoAndStop('twEast');
@@ -264,7 +262,7 @@ module.exports = class GroundTile extends StageBehaviourObject {
         return;
       }
 
-      if (bottomIsPP && bottomIsBinded) {
+      if (bottomIsBinded) {
         this.sprite.gotoAndStop('cross');
       } else {
         this.sprite.gotoAndStop('twWest');
@@ -279,12 +277,12 @@ module.exports = class GroundTile extends StageBehaviourObject {
           return;
         }
 
-        if (leftIsPP && leftIsBinded) {
+        if (leftIsBinded) {
           this.sprite.gotoAndStop('twNorth');
           return;
         }
 
-        if (rightIsPP && rightIsBinded) {
+        if (rightIsBinded) {
           this.sprite.gotoAndStop('twSouth');
           return;
         }
@@ -298,12 +296,12 @@ module.exports = class GroundTile extends StageBehaviourObject {
         }
 
         if (bottomIsRoad && rightIsRoad) {
-          if (leftIsPP && leftIsBinded) {
+          if (leftIsBinded) {
             this.sprite.gotoAndStop('twEast');
             return;
           }
 
-          if (topIsPP && topIsBinded) {
+          if (topIsBinded) {
             this.sprite.gotoAndStop('twSouth');
             return;
           }
@@ -313,12 +311,12 @@ module.exports = class GroundTile extends StageBehaviourObject {
         }
 
         if (bottomIsRoad && leftIsRoad) {
-          if (rightIsPP && rightIsBinded) {
+          if (rightIsBinded) {
             this.sprite.gotoAndStop('twEast');
             return;
           }
 
-          if (topIsPP && topIsBinded) {
+          if (topIsBinded) {
             this.sprite.gotoAndStop('twNorth');
             return;
           }
@@ -328,12 +326,12 @@ module.exports = class GroundTile extends StageBehaviourObject {
         }
 
         if (topIsRoad && rightIsRoad) {
-          if (leftIsPP && leftIsBinded) {
+          if (leftIsBinded) {
             this.sprite.gotoAndStop('twWest');
             return;
           }
 
-          if (bottomIsPP && bottomIsBinded) {
+          if (bottomIsBinded) {
             this.sprite.gotoAndStop('twSouth');
             return;
           }
@@ -342,12 +340,12 @@ module.exports = class GroundTile extends StageBehaviourObject {
           return;
         }
 
-        if (bottomIsPP && bottomIsBinded) {
+        if (bottomIsBinded) {
           this.sprite.gotoAndStop('twNorth');
           return;
         }
 
-        if (rightIsPP && rightIsBinded) {
+        if (rightIsBinded) {
           this.sprite.gotoAndStop('twWest');
           return;
         }
@@ -363,12 +361,12 @@ module.exports = class GroundTile extends StageBehaviourObject {
         return;
       }
 
-      if (topIsPP && topIsBinded) {
+      if (topIsBinded) {
         this.sprite.gotoAndStop('twWest');
         return;
       }
 
-      if (bottomIsPP && bottomIsBinded) {
+      if (bottomIsBinded) {
         this.sprite.gotoAndStop('twEast');
         return;
       }
@@ -385,68 +383,68 @@ module.exports = class GroundTile extends StageBehaviourObject {
 
     if (bindedCount === 2) {
       if (topIsRoad) {
-        if (bottomIsPP && leftIsPP) {
+        if (bottomIsBinded && leftIsBinded) {
           this.sprite.gotoAndStop('twNorth');
           return;
         }
 
-        if (bottomIsPP && rightIsPP) {
+        if (bottomIsBinded && rightIsBinded) {
           this.sprite.gotoAndStop('twSouth');
           return;
         }
 
-        if (leftIsPP && rightIsPP) {
+        if (leftIsBinded && rightIsBinded) {
           this.sprite.gotoAndStop('twWest');
           return;
         }
       }
 
       if (bottomIsRoad) {
-        if (topIsPP && leftIsPP) {
+        if (topIsBinded && leftIsBinded) {
           this.sprite.gotoAndStop('twNorth');
           return;
         }
 
-        if (topIsPP && rightIsPP) {
+        if (topIsBinded && rightIsBinded) {
           this.sprite.gotoAndStop('twSouth');
           return;
         }
 
-        if (leftIsPP && rightIsPP) {
+        if (leftIsBinded && rightIsBinded) {
           this.sprite.gotoAndStop('twEast');
           return;
         }
       }
 
       if (leftIsRoad) {
-        if (bottomIsPP && rightIsPP) {
+        if (bottomIsBinded && rightIsBinded) {
           this.sprite.gotoAndStop('twEast');
           return;
         }
 
-        if (topIsPP && rightIsPP) {
+        if (topIsBinded && rightIsBinded) {
           this.sprite.gotoAndStop('twWest');
           return;
         }
 
-        if (topIsPP && bottomIsPP) {
+        if (topIsBinded && bottomIsBinded) {
           this.sprite.gotoAndStop('twNorth');
           return;
         }
       }
 
       if (rightIsRoad) {
-        if (topIsPP && leftIsPP) {
+        if (topIsBinded && leftIsBinded) {
           this.sprite.gotoAndStop('twWest');
           return;
         }
 
-        if (topIsPP && bottomIsPP) {
+        if (topIsBinded && bottomIsBinded) {
           this.sprite.gotoAndStop('twSouth');
           return;
         }
 
-        if (bottomIsPP && leftIsPP) {
+        if (bottomIsBinded && leftIsBinded) {
           this.sprite.gotoAndStop('twEast');
           return;
         }
@@ -455,48 +453,48 @@ module.exports = class GroundTile extends StageBehaviourObject {
 
     if (bindedCount === 1) {
       if (topIsRoad) {
-        if (leftIsPP && leftIsBinded) {
+        if (leftIsBinded && leftIsBinded) {
           this.sprite.gotoAndStop('turnWest');
           return;
         }
 
-        if (rightIsPP && rightIsBinded) {
+        if (rightIsBinded && rightIsBinded) {
           this.sprite.gotoAndStop('turnNorth');
           return;
         }
       }
 
       if (leftIsRoad) {
-        if (topIsPP && topIsBinded) {
+        if (topIsBinded) {
           this.sprite.gotoAndStop('turnWest');
           return;
         }
 
-        if (bottomIsPP && bottomIsBinded) {
+        if (bottomIsBinded) {
           this.sprite.gotoAndStop('turnSouth');
           return;
         }
       }
 
       if (rightIsRoad) {
-        if (topIsPP && topIsBinded) {
+        if (topIsBinded) {
           this.sprite.gotoAndStop('turnNorth');
           return;
         }
 
-        if (bottomIsPP && bottomIsBinded) {
+        if (bottomIsBinded) {
           this.sprite.gotoAndStop('turnEast');
           return;
         }
       }
 
       if (bottomIsRoad) {
-        if (leftIsPP && leftIsBinded) {
+        if (leftIsBinded) {
           this.sprite.gotoAndStop('turnSouth');
           return;
         }
 
-        if (rightIsPP && rightIsBinded) {
+        if (rightIsBinded) {
           this.sprite.gotoAndStop('turnEast');
           return;
         }

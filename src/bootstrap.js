@@ -4,7 +4,34 @@ let jsonfile = require('jsonfile');
 let {BrowserWindow} = require('electron');
 let {dialog, FileFilter} = require('electron').remote;
 
-window.$ = window.jQuery = require('./lib/jquery/dist/jquery.min.js');
+window.$ = window.jQuery = require('jquery');
+require('./lib/jquery-modal/jquery.modal.min.js');
+
+let {grid} = require('./config');
+
+let showSuccessMessage = (message) => {
+  Lobibox.notify('success', {
+    size: 'mini',
+    delay: false,
+    soundPath: 'lib/lobibox/sounds/',
+    icon: false,
+    rounded: false,
+    position: 'bottom right',
+    msg: message
+  });
+};
+
+let showErrorMessage = (message) => {
+  Lobibox.notify('error', {
+    size: 'mini',
+    delay: false,
+    soundPath: 'lib/lobibox/sounds/',
+    icon: false,
+    rounded: false,
+    position: 'bottom right',
+    msg: message
+  });
+};
 
 $(document).ready(() => {
 
@@ -62,6 +89,16 @@ $(document).ready(() => {
     $distrOptions.hide();
     $controlButtons.show();
 
+    $clearButton.click(() => {
+      for (let i = 0; i < grid.rows; i++) {
+        for (let j = 0; j < grid.columns; j++) {
+          stage.ground.grid[j][i] = 0;
+        }
+      }
+
+      stage.selector.changeStream.next(null);
+    });
+
     $importButton.click(() => {
       dialog.showOpenDialog({
         title: 'Выберите файл для импорта',
@@ -71,7 +108,51 @@ $(document).ready(() => {
         }],
         properties: ['openFile']
       }, files => {
-        console.log(files);
+        if (_.isString(files[0])) {
+          let path = files[0];
+          jsonfile.readFile(path, (err, obj) => {
+            if (err) {
+              showErrorMessage('Не удалось открыть или прочитать файл');
+            }
+
+            if (obj !== null) {
+              if (!_.has(obj, 'map') || obj.map.length < grid.rows + 1 || obj.map[0].length < grid.columns) {
+                showErrorMessage('Карта не импортируемого файла не совпадает по размерам с текущей');
+                obj = null;
+              }
+
+              let distrOptions = ['determ', 'uniform', 'gauss', 'exp'];
+              if (!_.has(obj, 'options') || !_.has(obj, 'distr') || !distrOptions.includes(obj.distr)) {
+                showErrorMessage('Карта содержит некоррекную кофигурацию потока');
+                obj = null;
+              }
+
+              if (obj !== null) {
+                for (let i = 0; i < grid.rows; i++) {
+                  for (let j = 0; j < grid.columns; j++) {
+                    let value =  parseInt(obj.map[j][i], 10);
+                    stage.ground.grid[j][i] = _.isNaN(value) ? 0 : value;
+                  }
+                }
+
+                stage.selector.changeStream.next(null);
+
+                $distr.val(obj.distr.toString()).trigger('change');
+
+                $('#determMean').val(obj.options.determMean).trigger('change');
+                $('#uniformMax').val(obj.options.uniformMax).trigger('change');
+                $('#uniformMin').val(obj.options.uniformMin).trigger('change');
+                $('#gaussMean').val(obj.options.gaussMean).trigger('change');
+                $('#gaussDeviation').val(obj.options.gaussDeviation).trigger('change');
+                $('#expRate').val(obj.options.expRate).trigger('change');
+
+                showSuccessMessage('Файл успешно импортирован');
+              }
+            }
+
+            window.$.modal.close();
+          });
+        }
       });
     });
 
@@ -83,6 +164,11 @@ $(document).ready(() => {
           extensions: ['ump']
         }]
       }, filename => {
+
+        if (!filename) {
+          return;
+        }
+
         let exportJSON = {
           map: stage.ground.grid,
           distr: $distr.val(),
@@ -91,35 +177,19 @@ $(document).ready(() => {
             uniformMax: $('#uniformMax').val(),
             uniformMin: $('#uniformMin').val(),
             gaussMean: $('#gaussMean').val(),
-            gaussMean: $('#gaussMean').val(),
+            gaussDeviation: $('#gaussDeviation').val(),
             expRate: $('#expRate').val()
           }
         };
 
         jsonfile.writeFile(filename, exportJSON, error => {
           if (error) {
-            Lobibox.notify('error', {
-              size: 'mini',
-              delay: false,
-              soundPath: 'lib/lobibox/sounds/',
-              icon: false,
-              rounded: false,
-              position: 'bottom right',
-              msg: 'Не удалось сохранить файл'
-            });
+            showErrorMessage('Не удалось сохранить файл');
+          } else {
+            showSuccessMessage('Файл успешно сохранен');;
           }
 
-          Lobibox.notify('success', {
-            size: 'mini',
-            delay: false,
-            soundPath: 'lib/lobibox/sounds/',
-            icon: false,
-            rounded: false,
-            position: 'bottom right',
-            msg: 'Файл успешно сохранен'
-          });
-
-          modal.close();
+          window.$.modal.close();
         });
       });
     });
@@ -168,30 +238,12 @@ $(document).ready(() => {
       });
 
       if (!distrValid) {
-        Lobibox.notify('error', {
-          size: 'mini',
-          delay: false,
-          soundPath: 'lib/lobibox/sounds/',
-          icon: false,
-          rounded: false,
-          position: 'bottom right',
-          msg: 'Неверные параметры закона распределения'
-        });
-
+        showErrorMessage('Неверные параметры закона распределения');
         return;
       }
 
       if (!stage.issueManager.valid) {
-        Lobibox.notify('error', {
-          size: 'mini',
-          delay: false,
-          soundPath: 'lib/lobibox/sounds/',
-          icon: false,
-          rounded: false,
-          position: 'bottom right',
-          msg: 'В процессе проверки текущей конфигурации парковки обнаружены ошибки'
-        });
-
+        showErrorMessage('В процессе проверки текущей конфигурации парковки обнаружены ошибки');
         return;
       }
 
