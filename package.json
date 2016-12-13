@@ -4,7 +4,8 @@
   "description": "",
   "main": "src/main.js",
   "scripts": {
-    "start": "electron src/main.js"
+    "start": "electron src/main.js",
+    "build": "babel src --out-dir dist --presets es2015 --ignore src/lib"
   },
   "author": "Iceekey <iceekey@gmail.com>",
   "license": "MIT",
@@ -15,7 +16,6 @@
     "createjs-easeljs": "^0.8.2",
     "createjs-preloadjs": "^0.6.2",
     "createjs-tweenjs": "^0.6.0",
-    "electron": "^1.4.11",
     "jquery": "^3.1.1",
     "jsonfile": "^2.4.0",
     "probability-distributions": "^0.9.1",
@@ -23,6 +23,8 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-es2015": "^6.18.0",
     "electron-prebuilt-compile": "^1.4.6",
     "eslint": "^3.10.0",
     "eslint-config-defaults": "^9.0.0",

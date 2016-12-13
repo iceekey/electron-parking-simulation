@@ -5,7 +5,8 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,600" rel="stylesheet">
     <link rel="stylesheet" href="lib/lobibox/dist/css/lobibox.min.css"/>
     <link rel="stylesheet" href="lib/jquery-modal/jquery.modal.min.css" type="text/css" media="screen" />
-    <link rel="stylesheet" type="text/less" href="main.less" />
+    <!--<link rel="stylesheet" type="text/less" href="main.less" />-->
+    <link rel="stylesheet" type="text/css" href="main.css" />
     <title>Car parking</title>
 </head>
 <body>
@@ -101,18 +102,27 @@
 
     <div id="about" class="modal" style="display:none;">
         <p><h2>О программе</h2></p>
-        <p class="modal-space">Симулятор парковки ver1.0.0</p>
+        <p class="modal-space">Эта программа представляет собой симулятор парковки и реализует следующие функции:</p>
+        <ul>
+            <li>Генерирование потока машин и симуляция процесса парковки</li>
+            <li>Конструктор парковки для создания своих карт</li>
+            <li>Импорт и экспорт конфигурации парковки</li>
+            <li>Настройка потока машин</li>
+        </ul>
+
+        <!--<p>Для реализации используются язык программирования JavaScript и технология Electron.</p>-->
     </div>
 
     <div id="authors" class="modal" style="display:none;">
         <p><h2>Авторы</h2></p>
-        <p class="modal-space">Ну, короче, Дима Юля и Ксюша</p>
+        <p class="modal-space">Дмитрий, Юля и Ксюша</p>
     </div>
 
     <script src="./../node_modules/createjs-easeljs/lib/easeljs-NEXT.min.js"></script>
     <script src="./../node_modules/createjs-tweenjs/lib/tweenjs-NEXT.min.js"></script>
     <script src="./../node_modules/createjs-preloadjs/lib/preloadjs-NEXT.min.js"></script>
-    <script src="bootstrap.js"></script>
+    <!--<script src="bootstrap.js"></script>-->
+    <script src="./../dist/bootstrap.js"></script>
     <script src="lib/lobibox/dist/js/lobibox.min.js"></script>
     <script src="lib/jquery-numeric/dist/jquery-numeric.js"></script>
 </body>
