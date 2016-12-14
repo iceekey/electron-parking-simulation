@@ -117,7 +117,7 @@ $(document).ready(() => {
 
             if (obj !== null) {
               if (!_.has(obj, 'map') || obj.map.length < grid.rows + 1 || obj.map[0].length < grid.columns) {
-                showErrorMessage('Карта не импортируемого файла не совпадает по размерам с текущей');
+                showErrorMessage('Карта импортируемого файла не совпадает по размерам с текущей');
                 obj = null;
               }
 

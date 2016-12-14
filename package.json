@@ -5,7 +5,9 @@
   "main": "src/main.js",
   "scripts": {
     "start": "electron src/main.js",
-    "build": "babel src --out-dir dist --presets es2015 --ignore src/lib"
+    "build": "babel src --out-dir dist --presets es2015 --ignore src/lib",
+    "pack:windows": "electron-packager --overwrite . --out=packages --platform=win32 --arch=x64",
+    "pack:linux": "electron-packager --overwrite . --out=packages --platform=linux --arch=x64"
   },
   "author": "Iceekey <iceekey@gmail.com>",
   "license": "MIT",
@@ -16,6 +18,7 @@
     "createjs-easeljs": "^0.8.2",
     "createjs-preloadjs": "^0.6.2",
     "createjs-tweenjs": "^0.6.0",
+    "electron": "^1.4.12",
     "jquery": "^3.1.1",
     "jsonfile": "^2.4.0",
     "probability-distributions": "^0.9.1",
