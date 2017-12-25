@@ -29,7 +29,7 @@ Install dependencies (yep it uses bower, what a shame):
 
 ```bash
 npm install
-bower intall
+bower install
 ```
 
 Run application
