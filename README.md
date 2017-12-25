@@ -3,7 +3,11 @@ An Electron app that represents parking process in real time.
 
 ### Warning! This is my university project (low quality code) 😅. It hasn't changed since then. You download Win x64 demo and use this code in your purposes on your own risk.
 
-![Demo](https://s8.hostingkartinok.com/uploads/images/2017/12/829937030c9aa2495f1ff9f2ad919db3.gif)
+How it looks like:
+![Demo](https://s8.hostingkartinok.com/uploads/images/2017/12/f94d40e50fbdd280596ace95adae4c5d.gif)
+
+And the editor:
+![Editor Demo](https://s8.hostingkartinok.com/uploads/images/2017/12/695278c7a20a3cdb82db8b7b22abeb04.gif)
 
 ## Installation guide
 
