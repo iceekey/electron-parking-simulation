@@ -1,7 +1,7 @@
 # Electron Parking Simulation (Russian)
 An Electron app that represents parking process in real time.
 
-### Warning! This is my university project (low quality code) 😅. It hasn't changed since then. You download Win x64 demo and use this code in your purposes on your own risk.
+### Warning! This is my university project (low quality code) 😅. It hasn't changed since then. You can download Win x64 demo (link below) and use this code in your purposes on your own risk.
 
 How it looks like:
 
